@@ -1,0 +1,60 @@
+<MyText@BoxLayout>:
+    orientation: 'horizontal'
+    lblTxtIn: 'default'
+    theTxt: iAmTxt
+    Label:
+        text: root.lblTxtIn
+    TextInput:
+        id: iAmTxt
+        multiline: False
+        hint_text: 'equacao'
+
+<SecLayout@BoxLayout>:
+    orientation: 'horizontal'
+    theText: 'hue'
+    eq1: tx1
+    eq2: tx2
+
+    MyText:
+        id: tx1
+        lblTxtIn: root.theText
+
+    MyText:
+        id: tx2
+        lblTxtIn: root.theText
+
+<LbLay@BoxLayout>:
+    orientation: 'horizontal'
+
+    Label:
+        text: 'Equacao 1'
+
+    Label:
+        text: 'Equacao 2'
+
+<MyLayout@BoxLayout>:
+    orientation: 'vertical'
+    lTxt: 'Esperando'
+    LbLay
+
+    SecLayout:
+        id: sec1
+        theText: 'X: '
+
+    SecLayout
+        id: sec2
+        theText: 'Y: '
+
+    SecLayout
+        id: sec3
+        theText: 'Z: '
+
+    Button:
+        text: 'Computar'
+        on_release: root.compute()
+
+    Label:
+        markup: True
+        text: root.lTxt
+
+MyLayout
