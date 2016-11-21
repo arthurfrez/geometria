@@ -11,8 +11,6 @@ from sympy.solvers.solveset import linsolve
 from sympy.parsing.sympy_parser import parse_expr
 from sympy.parsing.sympy_parser import standard_transformations, implicit_multiplication_application
 
-# http://www.im.ufrj.br/dmm/projeto/projetoc/precalculo/sala/conteudo/capitulos/cap91s7.html
-# dando errado
 
 # Tamanho da janela
 Window.size = (400,200)
@@ -78,9 +76,6 @@ class MyLayout(BoxLayout):
             self.vec2[1] = int(self.theT(self.eq2[1]))
             self.vec2[2] = int(self.theT(self.eq2[2]))
 
-        print self.vec1[0], self.vec1[1], self.vec1[2]
-        print self.vec2[0], self.vec2[1], self.vec2[2]
-
     # Metodo para checkar se os vetores sao paralelos
     def isParallel(self):
         v = 0
@@ -118,7 +113,8 @@ class MyLayout(BoxLayout):
         r3 = Eq(e, f)
         pset = next(iter(sol))
 
-        if solve(r3.subs(t, pset[0])) == pset[1]: return True
+        hue = solve(r3.subs(t, pset[0]))
+        if hue[0] == pset[1]: return True
         return False
 
     # Metodo do botao
@@ -141,12 +137,14 @@ class MyLayout(BoxLayout):
             self.eq2[1] = self.ids.sec2.eq2.theTxt.text
             self.eq2[2] = self.ids.sec3.eq2.theTxt.text
 
-        self.genVectors()
-        b = self.isParallel()
-        c = self.isConcorrente()
-        if b: self.lTxt = 'As retas sao [color=33ff33]PARALELAS[/color]'
-        elif c: self.lTxt = 'As retas sao [color=33ff33]CONCORRENTES[/color]'
-        else: self.lTxt = 'As retas sao [color=33ff33]REVERSAS[/color]'
+        try:
+            self.genVectors()
+            b = self.isParallel()
+            c = self.isConcorrente()
+            if b: self.lTxt = 'As retas sao [color=33ff33]PARALELAS[/color]'
+            elif c: self.lTxt = 'As retas sao [color=33ff33]CONCORRENTES[/color]'
+            else: self.lTxt = 'As retas sao [color=33ff33]REVERSAS[/color]'
+        except: self.lTxt = '[color=ff3333]ERRO[/color]'
 
 class MyApp(App):
     # Construtor
