@@ -1,5 +1,5 @@
 import kivy
-kivy.require('1.9.1')
+kivy.require('1.10.0')
 
 from kivy.app import App
 from kivy.lang import Builder
@@ -18,13 +18,15 @@ Window.size = (400,200)
 t, s = symbols('t, s')
 
 class LbTxt(BoxLayout):
-    # Atributos
+    """Layout class"""
     from kivy.properties import ObjectProperty
     theTxt = ObjectProperty(None)
 
-# Classe do layout
 class MyLayout(BoxLayout):
+    """Layout class"""
+
     def generateLine(self, x, y, z):
+        """Line calculations"""
         transformations = (standard_transformations+ (implicit_multiplication_application,))
         x = parse_expr(x, transformations=transformations)
         y = parse_expr(y, transformations=transformations)
@@ -42,8 +44,8 @@ class MyLayout(BoxLayout):
 
         return Line3D(p1, p2)
 
-    # Metodo do botao
     def compute(self):
+        """Button method"""
         x1 = self.ids.sec1.eq1.theTxt.text
         y1 = self.ids.sec2.eq1.theTxt.text
         z1 = self.ids.sec3.eq1.theTxt.text
@@ -62,8 +64,10 @@ class MyLayout(BoxLayout):
         # except: self.lTxt = '[color=ff3333]ERRO[/color]'
 
 class MyApp(App):
-    # Construtor
+    """"Classe do app"""
+
     def build(self):
+        """Contrutor"""
         self.root = Builder.load_file('kwindow.kv')
         return self.root
 
